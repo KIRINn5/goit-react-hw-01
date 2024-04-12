@@ -1,24 +1,29 @@
-import Profile from './Profile/Profile';
-import userData from '../userData.json';
-import FriendList from './FriendList/FriendList';
-import friends from '../friends.json';
-import TransactionHistory from './TransactionHistory/TransactionHistory';
-import transactions from '../transactions.json';
+import { Profile } from './Profile';
+import user from './Profile/user.json';
+import { Statistics } from './Statistics';
+import stat from './Statistics/statistics.json';
+import { Friendlist } from './FriendList';
+import friends from './FriendList/friends.json';
+import { TransactionHistory } from './TransactionHistory';
+import transaction from './TransactionHistory/transactions.json';
 
-const App = () => {
+export const App = () => {
   return (
-    <>
-      <Profile
-        name={userData.userData.username}
-        tag={userData.userData.tag}
-        location={userData.userData.location}
-        image={userData.userData.avatar}
-        stats={userData.userData.stats}
-      />
-      <FriendList friends={friends.friends} />
-      <TransactionHistory items={transactions.transactions} />
-    </>
+    <div
+      style={{
+        display: 'flex',
+        // msFlexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: 40,
+        color: '#010101',
+        flexDirection: 'column',
+      }}
+    >
+      <Profile {...user}></Profile>
+      <Statistics stats={stat}></Statistics>
+      <Friendlist friends={friends}></Friendlist>
+      <TransactionHistory item={transaction}></TransactionHistory>
+    </div>
   );
 };
-
-export default App;

@@ -1,32 +1,48 @@
-/* eslint-disable react/prop-types */
-import css from "./Profile.module.css";
+import css from './Profile.module.css';
+import PropTypes from 'prop-types';
 
-// eslint-disable-next-line react/prop-types
-const Profile = ({ name, tag, location, image, stats }) => {
+export const Profile = ({
+  username,
+  tag,
+  location,
+  avatar,
+  stats: { followers, views, likes },
+}) => {
   return (
     <div className={css.profile}>
-      <div className={css.profileInfo}>
-        <img className={css.profileImage} src={image} alt="User avatar" />
-        <p className={css.profileName}>{name}</p>{" "}
-        <p className={css.tag}>@{tag}</p>{" "}
+      <div className={css.description}>
+        <img src={avatar} alt={username} className={css.avatar} />
+        <p className={css.name}>{username}</p>
+        <p className={css.tag}>@{tag}</p>
         <p className={css.location}>{location}</p>
       </div>
-      <ul className={css.profileStatsList}>
-        <li className={css.profileStatsItem}>
-          <span>Followers</span>
-          <span className={css.profileStatsItemSpan}>{stats.followers}</span>
+
+      <ul className={css.stats}>
+        <li>
+          <span className={css.label}>Followers</span>
+          <span className={css.quantity}>{followers}</span>
         </li>
-        <li className={css.profileStatsItem}>
-          <span>Views</span>
-          <span className={css.profileStatsItemSpan}>{stats.views}</span>
+        <li>
+          <span className={css.label}>Views</span>
+          <span className={css.quantity}>{views}</span>
         </li>
-        <li className={css.profileStatsItem}>
-          <span>Likes</span>
-          <span className={css.profileStatsItemSpan}>{stats.likes}</span>
+        <li>
+          <span className={css.label}>Likes</span>
+          <span className={css.quantity}>{likes}</span>
         </li>
       </ul>
     </div>
   );
 };
 
-export default Profile;
+Profile.propTypes = {
+  username: PropTypes.string.isRequired,
+  tag: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
+  stats: PropTypes.exact({
+    followers: PropTypes.number,
+    views: PropTypes.number,
+    likes: PropTypes.number,
+  }).isRequired,
+};
